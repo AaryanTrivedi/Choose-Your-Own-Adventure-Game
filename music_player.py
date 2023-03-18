@@ -6,6 +6,7 @@ import colorama
 from colorama import Fore
 
 import music.musicTimer as musicTimer
+from GUI.GUI import GUIInstance
 
 # Initialize songs
 
@@ -153,6 +154,41 @@ def beachvibes(print_song_name=True):
 
     return sound
 
+def tropicalfever(print_song_name=True):
+    import os
+
+    os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
+    import pygame
+
+    pygame.init()
+    pygame.mixer.init()
+    sound = pygame.mixer.Sound("Music/tropicalfever.mp3")
+    sound.set_volume(0.2)  # Now plays at 20% of full volume.
+    sound.play()
+
+    if print_song_name:
+        print(Fore.RED + "Currently Playing - Tropical Fever by Luke Bergs & LiQWYD")
+
+    return 
+
+def happyadricanvillage(print_song_name=True):
+    import os
+
+    os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
+    import pygame
+
+    pygame.init()
+    pygame.mixer.init()
+    sound = pygame.mixer.Sound("Music/happyafricanvillage.mp3")
+    sound.set_volume(0.2)  # Now plays at 20% of full volume.
+    sound.play()
+
+    if print_song_name:
+        print(Fore.RED + "Currently Playing - Happy African Village by John Bartmann")
+
+    return sound
+
+
 
 songs = [
     fluffingaduck,
@@ -163,6 +199,8 @@ songs = [
     tropicalsoul,
     newlands,
     beachvibes,
+    tropicalfever,
+    happyadricanvillage
 ]
 
 
@@ -172,8 +210,9 @@ def music():
     pygame.init()
     pygame.mixer.init()
 
-    start_song()
-    print(Fore.BLUE + "Music has started")
+    start_song(print_song_name = not GUIInstance.run_gui)
+    if not GUIInstance.run_gui:
+        print(Fore.BLUE + "Music has started")
 
 
 # Another function to not print all the stuff when starting new song
